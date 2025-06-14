@@ -28,7 +28,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 	}else{
 
 		$pass = md5($pass);
-		$sql = "SELECT * FROM admin WHERE USERNAME = '$uname' AND PASSWORD = '$pass'";
+		$sql = "SELECT * FROM ats_admin WHERE USERNAME = '$uname' AND PASSWORD = '$pass'";
 
 		$result = mysqli_query($conn, $sql);
 
@@ -114,14 +114,14 @@ if (isset($_POST['name']) && isset($_POST['uname'])
 		// hashing the password
         $pass = md5($pass);
 
-	    $sql = "SELECT * FROM admin WHERE USERNAME='$uname' ";
+	    $sql = "SELECT * FROM ats_admin WHERE USERNAME='$uname' ";
 		$result = mysqli_query($conn, $sql);
 
 		if (mysqli_num_rows($result) > 0) {
 			header("Location: Newadmin.php?error=The username is taken&$user_data");
 	        exit();
 		}else {
-           $sql2 = "INSERT INTO admin(NAME, USERNAME, CONTACT, EMAIL, PASSWORD) VALUES('$name', '$uname', '$contact', '$email' , '$pass')";
+           $sql2 = "INSERT INTO ats_admin(NAME, USERNAME, CONTACT, EMAIL, PASSWORD) VALUES('$name', '$uname', '$contact', '$email' , '$pass')";
            $result2 = mysqli_query($conn, $sql2);
            if ($result2) {
            	 header("Location: Newadmin.php?success=Account has been added successfully");
@@ -142,7 +142,7 @@ if (isset($_POST['deletedata']))
 {
 	$id = $_POST['delete_id'];
 
-	$q = "DELETE FROM admin WHERE ID='$id'";
+	$q = "DELETE FROM ats_admin WHERE ID='$id'";
 	$q_run = mysqli_query($conn, $q);
 
 	if ($q_run) 
@@ -166,7 +166,7 @@ if (isset($_POST['updatedata']))
 	$contact = $_POST['contact'];
 	$email = $_POST['email'];
 
-	$query= "UPDATE admin SET NAME ='$name', USERNAME ='$uname',CONTACT='$contact',EMAIL ='$email' WHERE ID='$id'";
+	$query= "UPDATE ats_admin SET NAME ='$name', USERNAME ='$uname',CONTACT='$contact',EMAIL ='$email' WHERE ID='$id'";
 	$query_run = mysqli_query($conn, $query);
 
 	if ($query_run) {
